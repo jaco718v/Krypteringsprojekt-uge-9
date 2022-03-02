@@ -5,6 +5,16 @@ import java.util.Scanner;
 
 public class Main {
 
+    public StringBuilder vigenereCypherDecrypt(String inputString, String letterKey){
+        int temp = 1;
+        return caesarCypherEncrypt(inputString,temp);
+    }
+
+    public StringBuilder vigenereCypherEncrypt(String inputString, String letterKey){
+        int temp = 1;
+        return caesarCypherEncrypt(inputString,temp);
+    }
+
     public StringBuilder caesarCypherDecrypt(String inputString, int cypherTal){
        cypherTal=cypherTal*(-1);
        return caesarCypherEncrypt(inputString,cypherTal);
