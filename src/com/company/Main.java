@@ -41,7 +41,7 @@ public class Main {
     }
 
     public char caesarCypherCharShift(int cypherShift, char letter) {    //Virker ikke ved shift højere end 26
-        char encryptet = letter;
+        char encrypted = letter;
         if (letter != ' ') {
             char encryption = (char) (letter + cypherShift);
             if (encryption > 'Z') {
@@ -49,9 +49,9 @@ public class Main {
             } else if (encryption < 'A') {
                 encryption = (char) (encryption + 26);
             }
-            encryptet = (encryption);
+            encrypted = (encryption);
         }
-        return encryptet;
+        return encrypted;
     }
 
     public StringBuilder caesarCypherEncrypt(String inputString, int cypherTal){
@@ -64,32 +64,63 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        StringBuilder text=null;
+        StringBuilder text;
         Scanner sc = new Scanner(System.in);
         Main obj = new Main();
         System.out.println("This program can encrypt and decrypt messages with the Caesar-Cypher," +
             " as well as the Vigenére-Cypher.");
-        System.out.println("It will also be possible to repeatably encrypt a message through multiple " +
-            "cyphers.");
-        System.out.println("Now choose your cypher!");
+        System.out.println("Choose your cypher!");
         int userChoice=1;
-        while(userChoice==1 || userChoice==2 || userChoice==3 || userChoice==4) {
-            System.out.println("Type the number corresponding to your desired action.\n" +
-                "Your options are:\nCaesar-cypher:\t\tencrypt(1)\tdecrypt(2)");
-            System.out.println("Vigenére-cypher:\tencrypt(3)\tdecrypt(4)");
-            System.out.println("To exit the program enter any other key.");
+        String enterText;
+        String enterKey;
+        int enterShift;
+        while(userChoice!=0) {
+            System.out.println("(1) Caesar\n(2) Vigenére\n(0) exit");
             userChoice = sc.nextInt();
             switch (userChoice) {
-                case 1 -> {System.out.println("Type your message followed by your shift-number");
-                text = obj.caesarCypherEncrypt(sc.next(), sc.nextInt());}
-                case 2 -> {System.out.println("Type the encrypted message followed by the shift-number");
-                text = obj.caesarCypherDecrypt(sc.next(), sc.nextInt());}
-                case 3 -> {System.out.println("Type your message followed by key of letters");
-                text = obj.vigenereCypherEncrypt(sc.next(), sc.next());}
-                case 4 -> {System.out.println("Type the encrypted message followed by the key of letters");
-                text = obj.vigenereCypherDecrypt(sc.next(), sc.next());}
+                case 1 -> {System.out.println("Caesar\n(1)Encrypt\n(2)Decrybt\n(0)Main menu");
+                    int userChoiceInner=sc.nextInt();
+                    switch (userChoiceInner){
+                        case 1 -> {
+                            System.out.println("Caesar encryption\nEnter text");
+                            enterText = sc.next();
+                            System.out.println("Choose shift (0-26)");
+                            enterShift= sc.nextInt();
+                            text = obj.caesarCypherEncrypt(enterText, enterShift);
+                            System.out.println("The encrypted result: "+text);
+                            }
+                        case 2 ->{System.out.println("Caesar decryption\nEnter encoded text");
+                            enterText = sc.next();
+                            System.out.println("Choose shift (0-26)");
+                            enterShift= sc.nextInt();
+                            text = obj.caesarCypherDecrypt(enterText, enterShift);
+                            System.out.println("The decrypted result: "+text);
+                        }
+                    }
+                }
+                case 2 ->  {System.out.println("Vigenére\n(1)Encrypt\n(2)Decrybt\n(0)Main menu");
+                    int userChoiceInner=sc.nextInt();
+                    switch (userChoiceInner){
+                        case 1 -> {
+                            System.out.println("Vigenére encryption\nEnter text");
+                            enterText = sc.next();
+                            System.out.println("Enter key of letters");
+                            enterKey= sc.next();
+                            text = obj.vigenereCypherEncrypt(enterText, enterKey);
+                            System.out.println("The encrypted result: "+text);
+                    }
+                        case 2 ->{System.out.println("Vigenére decryption\nEnter encoded text");
+                            enterText = sc.next();
+                            System.out.println("Enter key of letters");
+                            enterKey= sc.next();
+                            text = obj.vigenereCypherDecrypt(enterText, enterKey);
+                            System.out.println("The decrypted result: "+text);
+                        }
+                }
             }
-            System.out.println("You currrent result is: "+text);
+
+
+        }
         }
     }
 }
