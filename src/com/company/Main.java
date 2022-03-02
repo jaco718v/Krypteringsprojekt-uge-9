@@ -6,12 +6,21 @@ import java.util.Scanner;
 public class Main {
 
     public StringBuilder vigenereCypherDecrypt(String inputString, String letterKey){
-
-        int temp = 1;
-        return caesarCypherEncrypt(inputString,temp);
+        StringBuilder text = new StringBuilder();
+        int count=0;
+        for(int i=0; i<inputString.length(); i++){
+            int number = letterKey.toUpperCase().charAt(count++) - 'A';
+            if (count>letterKey.length()-1){
+                count=0;
+            }
+            number = number*(-1);
+            inputString = inputString.toUpperCase(Locale.ROOT);
+            text.append(caesarCypherCharShift(number,inputString.charAt(i)));
+        }
+        return text;
     }
 
-    public StringBuilder vigenereCypherEncrypt(String inputString, String letterKey){
+    public StringBuilder vigenereCypherEncrypt(String inputString, String letterKey){   //A er et shift på 0
         StringBuilder text = new StringBuilder();
         int count=0;
         for(int i=0; i<inputString.length(); i++){
