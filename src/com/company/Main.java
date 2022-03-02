@@ -6,21 +6,32 @@ import java.util.Scanner;
 public class Main {
 
     public StringBuilder vigenereCypherDecrypt(String inputString, String letterKey){
+
         int temp = 1;
         return caesarCypherEncrypt(inputString,temp);
     }
 
     public StringBuilder vigenereCypherEncrypt(String inputString, String letterKey){
-        int temp = 1;
-        return caesarCypherEncrypt(inputString,temp);
+        StringBuilder text = new StringBuilder();
+        int count=0;
+        for(int i=0; i<inputString.length(); i++){
+            int number = letterKey.toUpperCase().charAt(count++) - 'A';
+            if (count>letterKey.length()-1){
+                count=0;
+            }
+            inputString = inputString.toUpperCase(Locale.ROOT);
+            text.append(caesarCypherCharShift(number,inputString.charAt(i)));
+        }
+        return text;
     }
+
 
     public StringBuilder caesarCypherDecrypt(String inputString, int cypherTal){
        cypherTal=cypherTal*(-1);
        return caesarCypherEncrypt(inputString,cypherTal);
     }
 
-    public char caesarCypherChar(int cypherShift, char letter) {    //Virker ikke ved shift højere end 26
+    public char caesarCypherCharShift(int cypherShift, char letter) {    //Virker ikke ved shift højere end 26
         char encryptet = letter;
         if (letter != ' ') {
             char encryption = (char) (letter + cypherShift);
@@ -38,7 +49,7 @@ public class Main {
         StringBuilder text = new StringBuilder();
         inputString = inputString.toUpperCase(Locale.ROOT);
         for (int i =0;i<inputString.length();i++ ){
-            text.append(caesarCypherChar(cypherTal,inputString.charAt(i)));
+            text.append(caesarCypherCharShift(cypherTal,inputString.charAt(i)));
         }
         return text;
     }
