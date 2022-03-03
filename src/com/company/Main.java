@@ -15,7 +15,7 @@ public class Main {
             }
             number = number*(-1);
             inputString = inputString.toUpperCase(Locale.ROOT);
-            text.append(caesarCypherCharShift(number,inputString.charAt(i)));
+            text.append(cypherCharShift(number,inputString.charAt(i)));
         }
         return text;
     }
@@ -29,7 +29,7 @@ public class Main {
                 count=0;
             }
             inputString = inputString.toUpperCase(Locale.ROOT);
-            text.append(caesarCypherCharShift(number,inputString.charAt(i)));
+            text.append(cypherCharShift(number,inputString.charAt(i)));
         }
         return text;
     }
@@ -40,7 +40,7 @@ public class Main {
        return caesarCypherEncrypt(inputString,cypherTal);
     }
 
-    public char caesarCypherCharShift(int cypherShift, char letter) {    //Virker ikke ved shift højere end 26
+    public char cypherCharShift(int cypherShift, char letter) {   
         char encrypted = letter;
         if (letter != ' ') {
             char encryption = (char) (letter + cypherShift);
@@ -58,7 +58,7 @@ public class Main {
         StringBuilder text = new StringBuilder();
         inputString = inputString.toUpperCase(Locale.ROOT);
         for (int i =0;i<inputString.length();i++ ){
-            text.append(caesarCypherCharShift(cypherTal,inputString.charAt(i)));
+            text.append(cypherCharShift(cypherTal,inputString.charAt(i)));
         }
         return text;
     }
